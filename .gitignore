@@ -3,3 +3,7 @@
 .AppleDouble
 .LSOverride
 ._*
+
+# Godot garbage
+source/.import
+source/.stfolder
