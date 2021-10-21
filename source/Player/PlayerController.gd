@@ -19,7 +19,7 @@ func _integrate_forces(state):
 		input.x += 1
 	if (input.length_squared() > 0 and Vector2(state.linear_velocity.x, state.linear_velocity.z).length_squared() < speed):
 		input = input.normalized() * speed
-	if Input.is_action_pressed("movement_jump") and abs(state.get_velocity_at_local_position(Vector3()).y) < 0.01:
+	if Input.is_action_pressed("movement_jump") and abs(state.linear_velocity.y) < 0.01:
 		input.y += 1000
 	state.add_central_force(input.rotated(Vector3(0,1,0), rotation.y))
 
