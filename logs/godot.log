@@ -1,0 +1,6 @@
+Godot Engine v3.3.4.stable.arch_linux - https://godotengine.org
+OpenGL ES 3.0 Renderer: Radeon RX 580 Series (POLARIS10, DRM 3.42.0, 5.14.10-artix1-1, LLVM 12.0.1)
+OpenGL ES Batching: ON
+ 
+**ERROR**: Condition "default_certs != __null" is true.
+   At: modules/mbedtls/crypto_mbedtls.cpp:201:load_default_certificates() - Condition "default_certs != __null" is true.
