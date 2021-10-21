@@ -4,40 +4,31 @@ export var speed = 60
 
 var velocity := Vector3()
 
-func _ready():
-	pass
 
-#func _integrate_forces(state):
-#	var input = Vector3()
-#	if Input.is_action_pressed("movement_up"):
-#		input.z -= 1
-#	if Input.is_action_pressed("movement_down"):
-#		input.z += 1
-#	if Input.is_action_pressed("movement_left"):
-#		input.x -= 1
-#	if Input.is_action_pressed("movement_right"):
-#		input.x += 1
-#	if (input.length_squared() > 0 and Vector2(state.linear_velocity.x, state.linear_velocity.z).length_squared() < speed):
-#		input = input.normalized() * speed
-#	if Input.is_action_pressed("movement_jump") and abs(state.linear_velocity.y) < 0.01:
-#		input.y += 1000
-#	state.add_central_force(input.rotated(Vector3(0,1,0), rotation.y))
-
-export (int) var ACCELERATION = 500
-export (int) var MAX_SPEED = 175
-export (int) var FRICTION = 2500
+export (int) var ACCELERATION = 100
+export (int) var MAX_SPEED = 25
+export (int) var FRICTION = 250
+export (int) var GRAVITY = 2
+export (int) var TERMINAL_VELOCITY = 12
+var airTime := 0.0
 
 func _physics_process(delta):
 	var input_vector = Vector3()
 	input_vector.x = Input.get_action_strength("movement_right") - Input.get_action_strength("movement_left")
 	input_vector.z = Input.get_action_strength("movement_down") - Input.get_action_strength("movement_up")
-	input_vector = input_vector.normalized()
+	input_vector = input_vector.normalized().rotated(Vector3(0,1,0), rotation.y)
 	
 	if input_vector != Vector3():
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		velocity = velocity.move_toward(Vector3(), FRICTION * delta)
-	
+	if is_on_ceiling():
+		print("grounded ", delta)
+		airTime = 0
+		velocity.y += 2 if Input.action_press("movement_jump") else 0
+	else:
+		airTime += delta
+	velocity.y -= GRAVITY * airTime
 	velocity = move_and_slide(velocity);
 
 func _input(event):

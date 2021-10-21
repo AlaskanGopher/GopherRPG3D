@@ -28,7 +28,6 @@ transform = Transform( 0.680772, 0.0829589, -0.727782, 0.732495, -0.077101, 0.67
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-mode = 3
 
 [node name="Box" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 10, 4, 5 )
