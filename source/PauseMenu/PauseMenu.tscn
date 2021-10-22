@@ -70,5 +70,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ReturnButton" to="." method="_on_ReturnButton_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ResetButton" to="." method="_on_ReturnButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ResetButton" to="." method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
