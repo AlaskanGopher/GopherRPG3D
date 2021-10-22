@@ -4,7 +4,7 @@ export var speed = 60
 
 var velocity := Vector3()
 
-
+export (int) var THIRD_PERSON_DISTANCE = 5
 export (int) var WALKING_ACCELERATION = 100
 export (int) var RUNNING_ACCELERATION = 160
 export (int) var MAX_WALKING_SPEED = 25
@@ -16,6 +16,19 @@ export (int) var TERMINAL_VELOCITY = 12
 export (int) var JUMP_STRENGTH = 30
 var airTime := 0.0
 var jumped := false
+
+func _ready():
+	$Head/RayCast.add_exception(self)
+	$Head/RayCast.cast_to.z = THIRD_PERSON_DISTANCE
+	$"Head/Third-Person".translation.z = THIRD_PERSON_DISTANCE
+
+func _process(_delta):
+	if $Head/RayCast.get_collider() != null:
+		var distance = $Head/.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
+		print(distance)
+		$"Head/Third-Person".translation.z = distance
+	else:
+		$"Head/Third-Person".translation.z = THIRD_PERSON_DISTANCE
 
 func _physics_process(delta):
 	var acceleration := Vector3()
@@ -55,3 +68,4 @@ func _input(event):
 		if (abs(rotation.x + TAU * -event.relative.y/1000) < PI/2):
 			$Head.rotate_object_local(Vector3(1, 0, 0), TAU * -event.relative.y/1000)
 			$Head.rotation.x = -clamp(-$Head.rotation.x, -0.25*TAU, 0.25*TAU)
+
