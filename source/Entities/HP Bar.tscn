@@ -1,0 +1,29 @@
+[gd_scene format=2]
+
+[node name="HP Bar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -924.0
+margin_bottom = -500.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BarContainer" type="ColorRect" parent="."]
+margin_left = 1.0
+margin_top = 83.0
+margin_right = 99.0
+margin_bottom = 92.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InnerBar" type="ColorRect" parent="."]
+margin_left = 3.0
+margin_top = 85.0
+margin_right = 97.0
+margin_bottom = 90.0
+color = Color( 0.556863, 0.180392, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

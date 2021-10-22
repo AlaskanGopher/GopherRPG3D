@@ -28,7 +28,6 @@ func _physics_process(delta):
 	if is_on_floor():
 		airTime = 0
 		
-		print(velocity * FRICTION)
 		acceleration.x -= velocity.x * FRICTION
 		acceleration.z -= velocity.z * FRICTION
 		
