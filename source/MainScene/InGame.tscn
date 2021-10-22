@@ -19,7 +19,6 @@ albedo_color = Color( 0.72549, 0.72549, 0.72549, 1 )
 transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Terrain"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
