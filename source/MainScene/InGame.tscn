@@ -44,7 +44,10 @@ transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 3
 transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 36.0699, 25.6545, -21.8952 )
 
 [node name="Box5" parent="Box" instance=ExtResource( 2 )]
-transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 7.69195, 28.2822, -3.9514 )
+transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 16.141, 28, -9.186 )
+
+[node name="Box6" parent="Box" instance=ExtResource( 2 )]
+transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 24.5653, 35, -10.5375 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 
