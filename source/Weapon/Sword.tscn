@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Weapon/Sword.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.75, 0.25, 0.125 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.278431, 0.278431, 0.278431, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.2, 0.2, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.345098, 0.270588, 0.219608, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 0.33, 0.125, 1.5 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.167, 0.063, 0.75 )
+
+[node name="Sword" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Hilt" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Handle" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Blade" type="Area" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Blade"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Blade"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75 )
+shape = SubResource( 7 )
