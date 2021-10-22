@@ -40,7 +40,7 @@ func _physics_process(delta):
 		acceleration.z -= velocity.z * DRAG
 	acceleration.y -= GRAVITY * airTime
 	velocity += acceleration
-	move_and_slide(velocity, Vector3(0, 1, 0));
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0));
 
 func _input(event):
 	if event is InputEventMouseMotion:
