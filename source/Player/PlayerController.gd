@@ -5,31 +5,43 @@ export var speed = 60
 var velocity := Vector3()
 
 
-export (int) var ACCELERATION = 100
+export (int) var WALKING_ACCELERATION = 100
 export (int) var MAX_SPEED = 25
-export (int) var FRICTION = 250
+export (float) var FRICTION = .1
+export (float) var DRAG = .1
 export (int) var GRAVITY = 2
 export (int) var TERMINAL_VELOCITY = 12
+export (int) var JUMP_STRENGTH = 30
 var airTime := 0.0
+var jumped := false
 
 func _physics_process(delta):
-	var input_vector = Vector3()
+	var acceleration := Vector3()
+	
+	var input_vector := Vector3()
 	input_vector.x = Input.get_action_strength("movement_right") - Input.get_action_strength("movement_left")
 	input_vector.z = Input.get_action_strength("movement_down") - Input.get_action_strength("movement_up")
 	input_vector = input_vector.normalized().rotated(Vector3(0,1,0), rotation.y)
 	
-	if input_vector != Vector3():
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
-	else:
-		velocity = velocity.move_toward(Vector3(), FRICTION * delta)
-	if is_on_ceiling():
-		print("grounded ", delta)
+	acceleration += Vector3().move_toward(input_vector * MAX_SPEED, WALKING_ACCELERATION * delta)
+	
+	if is_on_floor():
 		airTime = 0
-		velocity.y += 2 if Input.action_press("movement_jump") else 0
+		
+		print(velocity * FRICTION)
+		acceleration.x -= velocity.x * FRICTION
+		acceleration.z -= velocity.z * FRICTION
+		
+		if (Input.is_action_pressed("movement_jump")):
+			acceleration.y += JUMP_STRENGTH
 	else:
 		airTime += delta
-	velocity.y -= GRAVITY * airTime
-	velocity = move_and_slide(velocity);
+		
+		acceleration.x -= velocity.x * DRAG
+		acceleration.z -= velocity.z * DRAG
+	acceleration.y -= GRAVITY * airTime
+	velocity += acceleration
+	move_and_slide(velocity, Vector3(0, 1, 0));
 
 func _input(event):
 	if event is InputEventMouseMotion:
