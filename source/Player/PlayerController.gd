@@ -47,6 +47,9 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0));
 
 func _input(event):
+	if event is InputEventMouseButton:
+		if (event.button_index == BUTTON_LEFT) and event.pressed:
+			$Sword.swing()
 	if event is InputEventMouseMotion:
 		rotate_y(TAU * -event.relative.x/800)
 		if (abs(rotation.x + TAU * -event.relative.y/1000) < PI/2):
