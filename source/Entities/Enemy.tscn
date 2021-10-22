@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Entities/NPC.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Entities/HP Bar.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1, 2, 1 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.113725, 0.505882, 0.807843, 1 )
+albedo_color = Color( 0.807843, 0.113725, 0.113725, 1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.5, 1, 0.5 )
@@ -15,7 +15,7 @@ extents = Vector3( 0.5, 1, 0.5 )
 [sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("Viewport")
 
-[node name="NPC" type="KinematicBody"]
+[node name="Enemy" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 script = ExtResource( 1 )
 
