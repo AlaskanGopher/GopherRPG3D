@@ -16,9 +16,10 @@ albedo_color = Color( 0.72549, 0.72549, 0.72549, 1 )
 [node name="Landscape" type="Spatial"]
 
 [node name="Terrain" type="StaticBody" parent="."]
-transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Terrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
@@ -34,8 +35,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 [node name="Box" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 10, 4, 5 )
 
-[node name="Box2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 0.499999, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.499999, 16, 16, -6 )
+[node name="Box2" parent="Box" instance=ExtResource( 2 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 10.6962, 12, -6.52628 )
+
+[node name="Box3" parent="Box" instance=ExtResource( 2 )]
+transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 36.0699, 13.8668, -21.8952 )
+
+[node name="Box4" parent="Box" instance=ExtResource( 2 )]
+transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 36.0699, 25.6545, -21.8952 )
+
+[node name="Box5" parent="Box" instance=ExtResource( 2 )]
+transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 7.69195, 28.2822, -3.9514 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 3 )]
 

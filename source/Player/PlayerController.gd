@@ -6,7 +6,9 @@ var velocity := Vector3()
 
 
 export (int) var WALKING_ACCELERATION = 100
-export (int) var MAX_SPEED = 25
+export (int) var RUNNING_ACCELERATION = 160
+export (int) var MAX_WALKING_SPEED = 25
+export (int) var MAX_RUNNING_SPEED = 40
 export (float) var FRICTION = .1
 export (float) var DRAG = .1
 export (int) var GRAVITY = 2
@@ -22,8 +24,10 @@ func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("movement_right") - Input.get_action_strength("movement_left")
 	input_vector.z = Input.get_action_strength("movement_down") - Input.get_action_strength("movement_up")
 	input_vector = input_vector.normalized().rotated(Vector3(0,1,0), rotation.y)
-	
-	acceleration += Vector3().move_toward(input_vector * MAX_SPEED, WALKING_ACCELERATION * delta)
+	if Input.is_action_pressed("movement_run"):
+		acceleration += Vector3().move_toward(input_vector * MAX_RUNNING_SPEED, RUNNING_ACCELERATION * delta)
+	else:
+		acceleration += Vector3().move_toward(input_vector * MAX_WALKING_SPEED, WALKING_ACCELERATION * delta)
 	
 	if is_on_floor():
 		airTime = 0
