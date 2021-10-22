@@ -22,7 +22,8 @@ func _on_QuitButton_pressed():
 	get_tree().quit()
 	
 func _on_ResetButton_pressed():
-	pass
+	get_tree().reload_current_scene()
+	unpause()
 
 func _unhandled_key_input(event):
 	if event.pressed and event.scancode == KEY_ESCAPE:
