@@ -4,7 +4,8 @@ export var speed = 60
 
 var velocity := Vector3()
 
-export (int) var THIRD_PERSON_DISTANCE = 5
+export (float) var SWORD_DISTANCE = 0.25
+export (float) var THIRD_PERSON_DISTANCE = 5
 export (int) var WALKING_ACCELERATION = 100
 export (int) var RUNNING_ACCELERATION = 160
 export (int) var MAX_WALKING_SPEED = 25
@@ -25,10 +26,13 @@ func _ready():
 func _process(_delta):
 	if $Head/RayCast.get_collider() != null:
 		var distance = $Head/.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
-		print(distance)
 		$"Head/Third-Person".translation.z = distance
 	else:
 		$"Head/Third-Person".translation.z = THIRD_PERSON_DISTANCE
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		$Sword.translation.z = -SWORD_DISTANCE*2
+	else:
+		$Sword.translation.z = -SWORD_DISTANCE
 
 func _physics_process(delta):
 	var acceleration := Vector3()
@@ -61,8 +65,9 @@ func _physics_process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if (event.button_index == BUTTON_LEFT) and event.pressed:
-			$Sword.swing()
+		if (event.button_index == BUTTON_LEFT):
+			if event.pressed:
+				$Sword.swing()
 	if event is InputEventMouseMotion:
 		rotate_y(TAU * -event.relative.x/800)
 		if (abs(rotation.x + TAU * -event.relative.y/1000) < PI/2):

@@ -1,10 +1,12 @@
 extends Spatial
 
-export var BLADE_LENGTH : float = .75
+export var BLADE_LENGTH : float = 1
 export var DAMAGE : int = 5
 
 func _ready():
-	pass
+	$Blade/CollisionShape.scale.z = BLADE_LENGTH
+	$Blade/MeshInstance.scale.z = BLADE_LENGTH
+	$Blade.translation.z = -BLADE_LENGTH
 
 func getDamageDealt(entity : Spatial) -> int:
 	if ($Blade.overlaps_body(entity)):
@@ -14,5 +16,4 @@ func getDamageDealt(entity : Spatial) -> int:
 
 func swing(_continuous := false):
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
-		print(enemy.name)
 		enemy.onHealthChange(-getDamageDealt(enemy))
