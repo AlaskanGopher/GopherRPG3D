@@ -1,0 +1,4 @@
+[
+    { "npcid": 0, "name": "Red", "color": "red", "text": "I am red."},
+    { "npcid": 1, "name": "Blue", "color": "blue", "text": "I am blue."}
+]
