@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Entities/NPC.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Entities/HP Bar.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1, 2, 1 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.113725, 0.505882, 0.807843, 1 )
+albedo_color = Color( 0.807843, 0.113725, 0.113725, 1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.5, 1, 0.5 )
@@ -15,7 +15,23 @@ extents = Vector3( 0.5, 1, 0.5 )
 [sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("Viewport")
 
-[node name="NPC" type="KinematicBody"]
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.6, 0.121569, 0.121569, 1 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.24
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+gravity = Vector3( 0, -20, 0 )
+radial_accel = 34.36
+radial_accel_random = 0.56
+color = Color( 0.34902, 0.0941176, 0.0941176, 1 )
+anim_speed_random = 0.54
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 0.1, 0.1, 0.1 )
+
+[node name="Enemy" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 script = ExtResource( 1 )
 
@@ -36,3 +52,12 @@ size = Vector2( 200, 100 )
 transparent_bg = true
 
 [node name="HP Bar" parent="Viewport" instance=ExtResource( 2 )]
+
+[node name="Particles" type="Particles" parent="."]
+material_override = SubResource( 5 )
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )

@@ -8,6 +8,7 @@
 source/.import
 source/export.cfg
 source/export_presets.cfg
+/logs
 
 # Syncthing
 source/.stfolder
