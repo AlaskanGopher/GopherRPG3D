@@ -6,6 +6,7 @@ var velocity : Vector3 = Vector3()
 var airTime = 0;
 var hp: int = MAX_HEALTH
 var dead := false
+var deadTime : float = 0
 
 func _ready():
 	self.add_to_group("Enemies")
@@ -20,9 +21,14 @@ func _physics_process(delta):
 	velocity += acceleration
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
 
-func _process(_delta):
-	var head = get_viewport().get_camera().get_parent_spatial()
-	$HUDObject.rotation = head.rotation + head.get_parent_spatial().rotation
+func _process(delta):
+	if not dead:
+		var head = get_viewport().get_camera().get_parent_spatial()
+		$HUDObject.rotation = head.rotation + head.get_parent_spatial().rotation
+	elif deadTime < 1:
+		deadTime += delta
+	else:
+		queue_free()
 
 func onHealthChange(var difference: int):
 	if difference != 0 and not dead:
@@ -34,3 +40,4 @@ func onHealthChange(var difference: int):
 			$MeshInstance.visible = false
 			$HUDObject.visible = false
 			$Particles.emitting = true
+			
