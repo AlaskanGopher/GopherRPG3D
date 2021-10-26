@@ -16,14 +16,26 @@ export (int) var GRAVITY = 2
 export (int) var TERMINAL_VELOCITY = 12
 export (int) var JUMP_STRENGTH = 30
 var airTime := 0.0
-var jumped := false
+var username := ""
 
 func _ready():
+	if get_tree().is_network_server():
+		if not is_network_master():
+			$"Head/Third-Person".visible = false
+			return
 	$Head/RayCast.add_exception(self)
 	$Head/RayCast.cast_to.z = THIRD_PERSON_DISTANCE
 	$"Head/Third-Person".translation.z = THIRD_PERSON_DISTANCE
 
+remote func drawClone(var pos : Vector3, var rot : Vector3):
+	if get_tree().get_rpc_sender_id() == get_tree().get_network_unique_id():
+		global_transform.origin = pos
+		rotation = rot
+
 func _process(_delta):
+	if get_tree().is_network_server():
+		if not is_network_master():
+			return
 	if $Head/RayCast.get_collider() != null:
 		var distance = $Head/.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
 		$"Head/Third-Person".translation.z = distance
@@ -35,6 +47,11 @@ func _process(_delta):
 		$Sword.translation.z = -SWORD_DISTANCE
 
 func _physics_process(delta):
+	if get_tree().is_network_server():
+		if not is_network_master():
+			return
+		else:
+			rpc("drawClone", global_transform.origin, rotation)
 	var acceleration := Vector3()
 	
 	var input_vector := Vector3()
@@ -64,6 +81,9 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0));
 
 func _input(event):
+	if get_tree().is_network_server():
+		if not is_network_master():
+			return
 	if event is InputEventMouseButton:
 		if (event.button_index == BUTTON_LEFT):
 			if event.pressed:
@@ -73,4 +93,3 @@ func _input(event):
 		if (abs(rotation.x + TAU * -event.relative.y/1000) < PI/2):
 			$Head.rotate_object_local(Vector3(1, 0, 0), TAU * -event.relative.y/1000)
 			$Head.rotation.x = -clamp(-$Head.rotation.x, -0.25*TAU, 0.25*TAU)
-

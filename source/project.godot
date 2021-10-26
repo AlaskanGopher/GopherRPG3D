@@ -24,6 +24,10 @@ config/name="Gopher RPG"
 run/main_scene="res://MainScene/InGame.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://globals.gd"
+
 [input]
 
 ui_left={
