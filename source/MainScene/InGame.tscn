@@ -54,7 +54,7 @@ transform = Transform( 0.866026, 0, 0.500001, 0, 1, 0, -0.500001, 0, 0.866026, 2
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
-[node name="KinematicBody" parent="." instance=ExtResource( 5 )]
+[node name="NPC" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0365715, 9.93884, -10.7451 )
 
 [node name="Enemy" parent="." instance=ExtResource( 6 )]

@@ -22,7 +22,7 @@ func _on_QuitButton_pressed():
 	get_tree().quit()
 	
 func _on_ResetButton_pressed():
-	get_tree().reload_current_scene()
+	assert(get_tree().reload_current_scene() == OK)
 	unpause()
 
 func _unhandled_key_input(event):

@@ -42,16 +42,16 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 3 )
 
-[node name="HUDObject" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
-flip_v = true
-texture = SubResource( 4 )
-
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 200, 100 )
 transparent_bg = true
 
 [node name="HP Bar" parent="Viewport" instance=ExtResource( 2 )]
+
+[node name="HUDObject" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+flip_v = true
+texture = SubResource( 4 )
 
 [node name="Particles" type="Particles" parent="."]
 material_override = SubResource( 5 )

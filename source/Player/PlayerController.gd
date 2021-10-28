@@ -20,15 +20,15 @@ var jumped := false
 func _ready():
 	$Head/RayCast.add_exception(self)
 	$Head/RayCast.cast_to.z = THIRD_PERSON_DISTANCE
-	$"Head/Third-Person".translation.z = THIRD_PERSON_DISTANCE
+	$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
 
 func _process(_delta):
 	if $Head/RayCast.get_collider() != null:
-		var distance = $Head/.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
+		var distance = $Head.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
 		print(distance)
-		$"Head/Third-Person".translation.z = distance
+		$Head/ThirdPerson.translation.z = distance
 	else:
-		$"Head/Third-Person".translation.z = THIRD_PERSON_DISTANCE
+		$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
 
 func _physics_process(delta):
 	var acceleration := Vector3()
@@ -48,13 +48,14 @@ func _physics_process(delta):
 		acceleration.x -= velocity.x * FRICTION
 		acceleration.z -= velocity.z * FRICTION
 		
-		if (Input.is_action_pressed("movement_jump")):
+		if Input.is_action_pressed("movement_jump"):
 			acceleration.y += JUMP_STRENGTH
 	else:
 		airTime += delta
 		
 		acceleration.x -= velocity.x * DRAG
 		acceleration.z -= velocity.z * DRAG
+	
 	acceleration.y -= GRAVITY * airTime
 	velocity += acceleration
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0));
@@ -63,7 +64,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if (event.button_index == BUTTON_LEFT) and event.pressed:
 			$Sword.swing()
-	if event is InputEventMouseMotion:
+	elif event is InputEventMouseMotion:
 		rotate_y(TAU * -event.relative.x/800)
 		if (abs(rotation.x + TAU * -event.relative.y/1000) < PI/2):
 			$Head.rotate_object_local(Vector3(1, 0, 0), TAU * -event.relative.y/1000)
