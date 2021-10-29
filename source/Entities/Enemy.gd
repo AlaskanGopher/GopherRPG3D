@@ -33,7 +33,7 @@ func _process(delta):
 func onHealthChange(var difference: int):
 	if difference != 0 and not dead:
 		hp += difference
-		$"Viewport/HP Bar/InnerBar".rect_scale.x = float(hp)/float(MAX_HEALTH)
+		$"Viewport/HP Bar/BarContainer/InnerBar".rect_scale.x = float(hp)/float(MAX_HEALTH)
 		$"Viewport/HP Bar/Label".text = str(hp)+"/"+str(MAX_HEALTH)
 		if hp <= 0:
 			dead = true

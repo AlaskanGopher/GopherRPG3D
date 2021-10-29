@@ -1,6 +1,9 @@
-extends CanvasLayer
+extends Control
 
-export (int) var HEALTH = 100
+export var MAX_HEALTH : int = 100
+
+var hp : int = MAX_HEALTH
 
 func _process(_delta):
-	$Control/Health.text = str("Health: ", HEALTH)
+	$"HP Bar/Label".text = str(MAX_HEALTH, '/', hp)
+	$"HP Bar/BarContainer/InnerBar".rect_scale.x = float(hp)/float(MAX_HEALTH)

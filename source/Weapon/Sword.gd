@@ -1,7 +1,7 @@
 extends Spatial
 
 export var BLADE_LENGTH : float = .75
-export var DAMAGE : int = 5
+export var DAMAGE : int = 12
 
 func _ready():
 	pass
@@ -14,5 +14,4 @@ func getDamageDealt(entity : Spatial) -> int:
 
 func swing(_continuous := false):
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
-		print(enemy.name)
 		enemy.onHealthChange(-getDamageDealt(enemy))

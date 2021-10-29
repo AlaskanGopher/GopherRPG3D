@@ -1,23 +1,24 @@
 extends KinematicBody
 
-export var speed = 60
+export var MAX_HEALTH            : int = 100
+export var THIRD_PERSON_DISTANCE : float = 5
+export var WALKING_ACCELERATION  : float = 100
+export var RUNNING_ACCELERATION  : float = 160
+export var MAX_WALKING_SPEED     : float = 25
+export var MAX_RUNNING_SPEED     : float = 40
+export var FRICTION              : float = .1
+export var DRAG                  : float = .1
+export var GRAVITY               : float = 2
+export var TERMINAL_VELOCITY     : float = 12
+export var JUMP_STRENGTH         : float = 30
+
+var hp := MAX_HEALTH
 
 var velocity := Vector3()
-
-export (int) var THIRD_PERSON_DISTANCE = 5
-export (int) var WALKING_ACCELERATION = 100
-export (int) var RUNNING_ACCELERATION = 160
-export (int) var MAX_WALKING_SPEED = 25
-export (int) var MAX_RUNNING_SPEED = 40
-export (float) var FRICTION = .1
-export (float) var DRAG = .1
-export (int) var GRAVITY = 2
-export (int) var TERMINAL_VELOCITY = 12
-export (int) var JUMP_STRENGTH = 30
 var airTime := 0.0
-var jumped := false
 
 func _ready():
+	$HUD.MAX_HEALTH = MAX_HEALTH
 	$Head/RayCast.add_exception(self)
 	$Head/RayCast.cast_to.z = THIRD_PERSON_DISTANCE
 	$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
@@ -25,10 +26,13 @@ func _ready():
 func _process(_delta):
 	if $Head/RayCast.get_collider() != null:
 		var distance = $Head.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
-		print(distance)
 		$Head/ThirdPerson.translation.z = distance
 	else:
 		$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
+	if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		$Sword.translation.z = -.75
+	else:
+		$Sword.translation.z = -.25
 
 func _physics_process(delta):
 	var acceleration := Vector3()

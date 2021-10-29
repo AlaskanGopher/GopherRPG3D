@@ -18,8 +18,14 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_right = 200.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = -30.0
+margin_right = 70.0
+margin_bottom = -10.0
 custom_fonts/font = SubResource( 1 )
 text = "100/100"
 align = 1
@@ -29,19 +35,25 @@ __meta__ = {
 }
 
 [node name="BarContainer" type="ColorRect" parent="."]
-margin_left = 1.0
-margin_top = 45.0
-margin_right = 199.0
-margin_bottom = 54.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_bottom = 9.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InnerBar" type="ColorRect" parent="."]
-margin_left = 3.0
-margin_top = 47.0
-margin_right = 197.0
-margin_bottom = 52.0
+[node name="InnerBar" type="ColorRect" parent="BarContainer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -2.5
+margin_right = -1.0
+margin_bottom = 2.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color( 0.556863, 0.180392, 0.180392, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
