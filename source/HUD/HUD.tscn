@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Entities/HP Bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://HUD/HUD_Script.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Hotbar/Selected.png" type="Texture" id=3]
 [ext_resource path="res://HUD/Hotbar.gd" type="Script" id=4]
 
 [node name="HUD" type="Control"]
@@ -23,6 +24,17 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 alignment = 1
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+SLOTS = 10
+
+[node name="SelectedSlot" type="NinePatchRect" parent="."]
+margin_left = 960.0
+margin_right = 1024.0
+margin_bottom = 64.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

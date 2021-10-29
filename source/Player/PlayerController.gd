@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var MAX_HEALTH            : int = 100
+export var MAX_HEALTH            : float = 100
 export var THIRD_PERSON_DISTANCE : float = 5
 export var WALKING_ACCELERATION  : float = 100
 export var RUNNING_ACCELERATION  : float = 160
