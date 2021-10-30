@@ -30,3 +30,12 @@ func _unhandled_key_input(event):
 			unpause()
 		else:
 			pause()
+
+func _on_OptionsButton_pressed():
+	$CenterContainer/MainMenu.visible = false
+	$CenterContainer/OptionsMenu.visible = true
+
+
+func _on_OptionsBackButton_pressed():
+	$CenterContainer/MainMenu.visible = true
+	$CenterContainer/OptionsMenu.visible = false
