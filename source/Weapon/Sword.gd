@@ -1,7 +1,10 @@
 extends Spatial
 
-export var BLADE_LENGTH : float = .75
-export var DAMAGE : int = 12
+export var BLADE_LENGTH    : float = .75
+export var DAMAGE          : int = 12
+export var COOLDOWN_LENGTH : float = .5
+
+var cooldown = 0
 
 func _ready():
 	pass
@@ -12,6 +15,15 @@ func getDamageDealt(entity : Spatial) -> int:
 		return int(1 + DAMAGE * min(BLADE_LENGTH, distance) / BLADE_LENGTH)
 	return 0
 
+func _physics_process(delta):
+	cooldown += delta
+
 func swing(_continuous := false):
-	for enemy in get_tree().get_nodes_in_group("Enemies"):
-		enemy.onHealthChange(-getDamageDealt(enemy))
+	if cooldown > COOLDOWN_LENGTH:
+		for enemy in get_tree().get_nodes_in_group("Enemies"):
+			var damage = getDamageDealt(enemy)
+			if damage != 0:
+				enemy.onHealthChange(-damage)
+				cooldown = 0
+	else:
+		print("calm down")

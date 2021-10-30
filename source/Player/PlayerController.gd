@@ -18,6 +18,8 @@ export var FALL_DAMAGE_THRESHOLD : float = 75
 var hp := MAX_HEALTH
 var stamina := 1.0
 var staminaCooldown := 0.0
+var dead := false
+var deathCooldown := 0.0
 
 var velocity := Vector3()
 var airTime := 0.0
@@ -40,6 +42,12 @@ func _process(_delta):
 		$Sword.translation.z = -.25
 
 func _physics_process(delta):
+	if dead:
+		if deathCooldown > 2.0:
+			assert(get_tree().reload_current_scene() == OK)
+		else:
+			deathCooldown += delta
+		return
 	var acceleration := Vector3()
 	
 	var input_vector := Vector3()
@@ -78,17 +86,18 @@ func _physics_process(delta):
 		if staminaCooldown >= STAMINA_REGEN_TIME:
 			stamina += delta/10
 	
-	$HUD.stamina = max(0, stamina)
-	print(stamina)
+	$HUD.stamina = clamp(stamina, 0, 1)
 	if (airTime != 0 and is_on_floor()):
 		
 		if (-lastVelocity.y > FALL_DAMAGE_THRESHOLD):
 			hp -= (-lastVelocity.y-FALL_DAMAGE_THRESHOLD)/2
-			hp = clamp(hp, 0, MAX_HEALTH)
+			hp = int(clamp(hp, 0, MAX_HEALTH))
 			$HUD.hp = hp
 			if hp == 0:
 				$HUD/ColorRect.visible = true
 				$HUD/Label.visible = true
+				dead = true
+				deathCooldown = 0
 
 func _input(event):
 	if event is InputEventMouseButton:
