@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://HUD/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://HUD/Hotbar.gd" type="Script" id=2]
 [ext_resource path="res://HUD/InventoryGrid.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Hotbar/Selected.png" type="Texture" id=4]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -65,3 +66,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 SLOTS = 10
+
+[node name="Selected" type="NinePatchRect" parent="."]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
