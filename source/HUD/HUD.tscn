@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Fonts/Scream When You're Ready to Die.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/HUD_Script.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Hotbar/Selected.png" type="Texture" id=3]
 [ext_resource path="res://HUD/Hotbar.gd" type="Script" id=4]
 [ext_resource path="res://Entities/HP Bar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://HUD/Inventory.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 83
@@ -97,6 +98,9 @@ color = Color( 0.243137, 0.454902, 0.298039, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Inventory" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="Label" type="Label" parent="."]
 visible = false
