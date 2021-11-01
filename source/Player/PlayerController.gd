@@ -57,7 +57,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("movement_run"):
 		if stamina > 0:
 			acceleration += Vector3().move_toward(input_vector * MAX_RUNNING_SPEED, RUNNING_ACCELERATION * delta)
-			stamina = clamp(stamina - (RUNNING_STAMINA * delta) * abs(Input.get_action_strength("movement_down") - Input.get_action_strength("movement_up")), 0, 1)
+			stamina = clamp(stamina - (RUNNING_STAMINA * delta) * abs(Input.get_action_strength("movement_down") - Input.get_action_strength("movement_up")), 0.0, 1.0)
 			if stamina != $HUD.stamina: staminaCooldown = 0.0
 		else:
 			stamina = -1
@@ -86,7 +86,8 @@ func _physics_process(delta):
 		if staminaCooldown >= STAMINA_REGEN_TIME:
 			stamina += delta/10
 	
-	$HUD.stamina = clamp(stamina, 0, 1)
+	stamina = clamp(stamina, 0.0, 1.0)
+	$HUD.stamina = stamina
 	if (airTime != 0 and is_on_floor()):
 		
 		if (-lastVelocity.y > FALL_DAMAGE_THRESHOLD):
