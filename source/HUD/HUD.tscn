@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Resources/Fonts/Scream When You're Ready to Die.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/HUD_Script.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://HUD/Hotbar.gd" type="Script" id=4]
 [ext_resource path="res://Entities/HP Bar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HUD/Inventory.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/Input Prompts/MouseInputs.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 83
@@ -47,6 +48,18 @@ region_rect = Rect2( 0, 0, 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ButtonPrompt" type="NinePatchRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 7 )
 
 [node name="HP Bar" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.5

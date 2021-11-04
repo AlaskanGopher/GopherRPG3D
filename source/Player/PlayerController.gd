@@ -14,6 +14,7 @@ export var GRAVITY               : float = 2
 export var TERMINAL_VELOCITY     : float = 12
 export var JUMP_STRENGTH         : float = 30
 export var FALL_DAMAGE_THRESHOLD : float = 75
+export var INTERACTION_REACH     : float = 5
 
 var hp := MAX_HEALTH
 var stamina := 1.0
@@ -27,16 +28,26 @@ var airTime := 0.0
 
 func _ready():
 	$HUD.MAX_HEALTH = MAX_HEALTH
-	$Head/RayCast.add_exception(self)
-	$Head/RayCast.cast_to.z = THIRD_PERSON_DISTANCE
+	
+	$Head/CameraRayCast.add_exception(self)
+	$Head/CameraRayCast.cast_to.z = THIRD_PERSON_DISTANCE
+	$Head/ActionRayCast.add_exception(self)
+	$Head/ActionRayCast.cast_to.z = -INTERACTION_REACH
+	
 	$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
 
 func _process(_delta):
-	if $Head/RayCast.get_collider() != null:
-		var distance = $Head.global_transform.origin.distance_to($Head/RayCast.get_collision_point())
+	if $Head/CameraRayCast.get_collider() != null:
+		var distance = $Head.global_transform.origin.distance_to($Head/CameraRayCast.get_collision_point())
 		$Head/ThirdPerson.translation.z = distance
 	else:
 		$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
+		
+	var lookingAt = $Head/ActionRayCast.get_collider()
+	if lookingAt != null and lookingAt.has_method("playerInteraction"):
+		lookingAt.playerInteraction(self)
+	else:
+		$HUD/ButtonPrompt.visible = false
 	
 	if (inputLock):
 		return
