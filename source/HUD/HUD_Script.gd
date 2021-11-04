@@ -17,3 +17,14 @@ func _on_Inventory_opened():
 func _on_Inventory_closed():
 	$Hotbar.visible = true
 	$SelectedSlot.visible = true
+
+func prompt(var button : int):
+	var switch = {
+		BUTTON_RIGHT: showPrompt(preload("res://Resources/Input Prompts/MouseInputs.png"), Rect2(0, 0, 32, 32))
+	}
+	switch.get(button)
+
+func showPrompt(var texture : Texture, var rect : Rect2):
+	$ButtonPrompt.visible = true
+	$ButtonPrompt.texture = texture
+	$ButtonPrompt.region_rect = rect

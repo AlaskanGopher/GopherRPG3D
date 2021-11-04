@@ -32,7 +32,11 @@ shape = SubResource( 3 )
 [node name="Head" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 
-[node name="RayCast" type="RayCast" parent="Head"]
+[node name="ActionRayCast" type="RayCast" parent="Head"]
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+
+[node name="CameraRayCast" type="RayCast" parent="Head"]
 enabled = true
 cast_to = Vector3( 0, 0, 5 )
 
