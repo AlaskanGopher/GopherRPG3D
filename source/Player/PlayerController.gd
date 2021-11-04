@@ -20,6 +20,7 @@ var stamina := 1.0
 var staminaCooldown := 0.0
 var dead := false
 var deathCooldown := 0.0
+var inputLock := false
 
 var velocity := Vector3()
 var airTime := 0.0
@@ -36,6 +37,10 @@ func _process(_delta):
 		$Head/ThirdPerson.translation.z = distance
 	else:
 		$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
+	
+	if (inputLock):
+		return
+	
 	if Input.is_mouse_button_pressed(BUTTON_LEFT):
 		$Sword.translation.z = -.75
 	else:
@@ -47,6 +52,8 @@ func _physics_process(delta):
 			assert(get_tree().reload_current_scene() == OK)
 		else:
 			deathCooldown += delta
+		return
+	if (inputLock):
 		return
 	var acceleration := Vector3()
 	
@@ -101,6 +108,8 @@ func _physics_process(delta):
 				deathCooldown = 0
 
 func _input(event):
+	if (inputLock):
+		return
 	if event is InputEventMouseButton:
 		if (event.button_index == BUTTON_LEFT) and event.pressed:
 			$Sword.swing()
@@ -110,3 +119,10 @@ func _input(event):
 			$Head.rotate_object_local(Vector3(1, 0, 0), TAU * -event.relative.y/1000)
 			$Head.rotation.x = -clamp(-$Head.rotation.x, -0.25*TAU, 0.25*TAU)
 
+
+
+func _on_Inventory_opened():
+	inputLock = true
+
+func _on_Inventory_closed():
+	inputLock = false

@@ -41,3 +41,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 
 [node name="Sword" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.6, 0, -0.25 )
+
+[connection signal="closed" from="HUD/Inventory" to="." method="_on_Inventory_closed"]
+[connection signal="opened" from="HUD/Inventory" to="." method="_on_Inventory_opened"]
+
+[editable path="HUD"]

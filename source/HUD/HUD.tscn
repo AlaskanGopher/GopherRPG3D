@@ -125,3 +125,6 @@ color = Color( 0, 0, 0, 0.4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="closed" from="Inventory" to="." method="_on_Inventory_closed"]
+[connection signal="opened" from="Inventory" to="." method="_on_Inventory_opened"]
