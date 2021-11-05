@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Resources/Fonts/Scream When You're Ready to Die.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD/HUD_Script.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Entities/HP Bar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://HUD/Inventory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resources/Input Prompts/MouseInputs.png" type="Texture" id=7]
+[ext_resource path="res://HUD/ReticleShader.gdshader" type="Shader" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 83
@@ -15,6 +16,7 @@ outline_color = Color( 0, 0, 0, 0.462745 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 8 )
 
 [node name="HUD" type="Control"]
 margin_left = 1.0
@@ -151,6 +153,7 @@ margin_left = -2.0
 margin_top = -2.0
 margin_right = 2.0
 margin_bottom = 2.0
+color = Color( 0.454902, 0.454902, 0.454902, 1 )
 
 [connection signal="closed" from="Inventory" to="." method="_on_Inventory_closed"]
 [connection signal="opened" from="Inventory" to="." method="_on_Inventory_opened"]

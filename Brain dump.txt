@@ -1,0 +1,42 @@
+situation - item needed
+
+-Greeting
+-Farewell
+
+-Quests
+  -Procedural
+  -Story
+  -Random/Misc
+
+-Small talk
+
+Reputation stat (ty LDA)
+  Shady towns vs. transparent towns
+    Shady towns
+      Harder to build reputation, better ceiling for good items
+    Transparent towns
+      Easier to build reputation, worse items
+    Volitility
+      stat of towns, may be dependent or independent of shady/transparent idrk
+      shows whether or not it is possible to gain reputation with all members/clans or if you must stick with one in particular
+
+Weapon stuff
+  Cosmetics
+    both cosmetics out of common materials, and using regular weapon parts as cosmetics
+    unique cosmetics as loot?
+  Weapon building
+    Different rarities can be honed different numbers of times
+    when removing parts, rarities lost and materials regained FOR THAT PART, rest of weapon stays intact
+
+{
+  "greetings": {
+    "super_pissed",
+    "pissed",
+    "mildly_pissed",
+    "almost_not_pissed",
+    "not_pissed"
+  },
+  "farewells",
+  "useless",
+  "questlines"
+}
