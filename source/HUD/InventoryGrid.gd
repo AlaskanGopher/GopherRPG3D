@@ -16,6 +16,9 @@ func _ready():
 			slot.size_flags_horizontal = SIZE_EXPAND_FILL
 			slot.size_flags_vertical   = SIZE_EXPAND_FILL
 			slot.region_rect = Rect2(0, 0, 32, 32)
+			var item = Spatial.new()
+			item.name = "Empty"
+			slot.add_child(item)
 			add_child(slot)
 
 func resize(var slotSize : float):

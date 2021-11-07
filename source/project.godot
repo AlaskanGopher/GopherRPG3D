@@ -8,11 +8,25 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Consumable",
+"language": "GDScript",
+"path": "res://Items/Consumables.gd"
+} ]
+_global_script_class_icons={
+"Consumable": ""
+}
+
 [application]
 
 config/name="Gopher RPG"
 run/main_scene="res://MainScene/InGame.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://globals.gd"
 
 [display]
 

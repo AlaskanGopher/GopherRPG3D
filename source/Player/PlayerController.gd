@@ -42,20 +42,14 @@ func _process(_delta):
 		$Head/ThirdPerson.translation.z = distance
 	else:
 		$Head/ThirdPerson.translation.z = THIRD_PERSON_DISTANCE
-		
+	
+	
+	# Add lastLookedAt to be able to call nodes when the player stops looking
 	var lookingAt = $Head/ActionRayCast.get_collider()
 	if lookingAt != null and lookingAt.has_method("playerInteraction"):
 		lookingAt.playerInteraction(self)
 	else:
 		$HUD/ButtonPrompt.visible = false
-	
-	if (inputLock):
-		return
-	
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		$Sword.translation.z = -.75
-	else:
-		$Sword.translation.z = -.25
 
 func _physics_process(delta):
 	if dead:
@@ -121,16 +115,11 @@ func _physics_process(delta):
 func _input(event):
 	if (inputLock):
 		return
-	if event is InputEventMouseButton:
-		if (event.button_index == BUTTON_LEFT) and event.pressed:
-			$Sword.swing()
 	elif event is InputEventMouseMotion:
 		rotate_y(TAU * -event.relative.x/800)
 		if (abs(rotation.x + TAU * -event.relative.y/1000) < PI/2):
 			$Head.rotate_object_local(Vector3(1, 0, 0), TAU * -event.relative.y/1000)
 			$Head.rotation.x = -clamp(-$Head.rotation.x, -0.25*TAU, 0.25*TAU)
-
-
 
 func _on_Inventory_opened():
 	inputLock = true

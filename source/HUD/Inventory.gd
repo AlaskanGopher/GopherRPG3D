@@ -2,7 +2,7 @@ extends Control
 
 export var SLOT_SIZE : float = 64
 
-var selectedCell : Vector3 = Vector3(-1, 0, 0) # Vector3(0: Inventory; 1: Hotbar, rowNumber (y), colNumber (x)
+var selectedCell : Vector3 = Vector3(-1, 0, 0) # Vector3(1: Inventory; 0: Hotbar, rowNumber (y), colNumber (x)
 
 signal opened()
 signal closed()
@@ -27,15 +27,21 @@ func _process(_delta):
 		var slotBounds : Rect2 = slot.get_global_rect()
 		if (slotBounds.has_point(mousePosition)):
 			var splitName = slot.name.split(',')
-			selectedCell = Vector3(0, int(splitName[0][-1]), int(splitName[1][0]))
+			selectedCell = Vector3(1, int(splitName[0][-1]), int(splitName[1][0]))
 			$Selected.rect_size = Vector2(SLOT_SIZE, SLOT_SIZE)
 			$Selected.set_global_position(slotBounds.position)
 			return
 	for slot in $VBoxContainer/Hotbar.get_children():
 		var slotBounds : Rect2 = slot.get_global_rect()
 		if (slotBounds.has_point(mousePosition)):
-			selectedCell = Vector3(1, 0, int(slot.name[-1]))
+			selectedCell = Vector3(0, 0, int(slot.name[-1]))
 			$Selected.rect_size = Vector2(SLOT_SIZE, SLOT_SIZE)
 			$Selected.set_global_position(slotBounds.position)
 			return
 	$Selected.rect_size = Vector2(0, 0)
+
+func getSlot(var slotLocation : Vector3 = selectedCell):
+	if slotLocation.x == 0:
+		return $VBoxContainer/Hotbar.get_children()[slotLocation.z]
+	else:
+		return $VBoxContainer/InventoryGrid.get_children()[$VBoxContainer/InventoryGrid.columns * slotLocation.y + slotLocation.z]
